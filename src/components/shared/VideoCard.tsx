@@ -40,7 +40,9 @@ const VideoCard = ({
           />
         </div>
         <div
-          className={`flex gap-2 item-start ${isVertical ? "w-full" : "w-3/5"}`}
+          className={`flex flex-col gap-2 items-start ${
+            isVertical ? "w-full" : "w-3/5"
+          }`}
         >
           {channel && channelAvatar && isVertical ? (
             <Avatar className="mt-1" imageSrc={channel.imageSrc} />
@@ -68,7 +70,7 @@ const VideoCard = ({
                 ) : null
               }`}
             >
-              <p className="text-neutral-400 text-sm whitespace-nowrap ">
+              <p className="text-neutral-400 text-sm whitespace-nowrap">
                 {channel.name}
               </p>
             </div>
