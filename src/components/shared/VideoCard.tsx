@@ -35,7 +35,8 @@ const VideoCard = ({
             className="object-cover rounded-lg"
             src={video.thumbnailSrc}
             alt={video.title}
-            layout="fill"
+            fill
+            sizes="20vw"
           />
         </div>
         <div
