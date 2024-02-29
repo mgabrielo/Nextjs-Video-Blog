@@ -8,15 +8,14 @@ import { compactNumberFormat } from "@/utils/numUtils";
 import Link from "next/link";
 import Button from "../shared/Button";
 import SubscribeButton from "../shared/SubscribeButton";
-import { useSubscribed } from "@/hooks/useSubscribed";
 
 interface IChannelHeader {
   channel: Channel;
   videoCount: number;
 }
+
 const ChannelHeader = ({ channel, videoCount }: IChannelHeader) => {
   const currentUser = useContext(CurrentUserContext);
-  const { hasSubscribed, toggleSubscribed } = useSubscribed({ id: channel.id });
 
   return (
     <div className="flex flex-col md:flex-row gap-5 md:gap-0 px-24 py-6 justify-between items-center">
