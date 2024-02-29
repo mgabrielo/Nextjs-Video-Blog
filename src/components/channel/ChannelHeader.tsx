@@ -37,11 +37,7 @@ const ChannelHeader = ({ channel, videoCount }: IChannelHeader) => {
           </Button>
         </Link>
       ) : (
-        <>
-          {channel && channel.id !== undefined && (
-            <SubscribeButton id={channel.id} />
-          )}
-        </>
+        <>{channel.id !== undefined && <SubscribeButton id={channel.id} />}</>
       )}
     </div>
   );
