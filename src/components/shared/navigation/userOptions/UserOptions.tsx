@@ -20,7 +20,7 @@ const UserOptions = () => {
     if (!currentChannels) {
       createChannelModal?.onOpen();
     } else {
-      router.push("studio/upload");
+      router.push("/studio/upload");
     }
   };
   return currentUser ? (

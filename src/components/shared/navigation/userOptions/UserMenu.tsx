@@ -25,8 +25,11 @@ const UserMenu: FC<UserMenuProps> = ({ onClose }) => {
   }
   return (
     <>
-      <div className="min-h-screen w-screen fixed z-30" onClick={onClose} />
-      <div className="absolute rounded-md bg-gray-700 w-72 right-2 top-16 text-sm flex flex-col overflow-hidden z-40">
+      <div className="fixed inset-0" onClick={onClose} />
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="absolute rounded-md bg-gray-700 w-72 right-2 top-16 text-sm flex flex-col overflow-hidden z-40"
+      >
         <MenuItem
           label="Your Channel"
           logo={<PiUserSquareFill className="w-7 h-7" />}

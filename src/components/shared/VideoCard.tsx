@@ -49,7 +49,7 @@ const VideoCard = ({
           ) : null}
           <div className="flex flex-col">
             <h3
-              className={`line-clamp-2 ${
+              className={`line-clamp-2 px-1 ${
                 isVertical ? "text-lg" : "text-md leading-5"
               }`}
             >
@@ -75,14 +75,20 @@ const VideoCard = ({
               </p>
             </div>
           ) : null}
-          <p className="text-neutral-400 text-sm mt-1.5">
+          <p className="text-neutral-400 text-sm px-1">
             {compactNumberFormat(video.viewCount)} views&nbsp;
             {dayjs(video.createdAt).fromNow()}{" "}
           </p>
           {includeDescription ? (
             <div className="whitespace-pre-line text-sm text-neutral-400">
               {video.description.split("\n").map((line, index) => {
-                return line == "" ? <br /> : <p key={index}>{line}</p>;
+                return line == "" ? (
+                  <br />
+                ) : (
+                  <p key={index} className="px-1">
+                    {line}
+                  </p>
+                );
               })}
             </div>
           ) : null}

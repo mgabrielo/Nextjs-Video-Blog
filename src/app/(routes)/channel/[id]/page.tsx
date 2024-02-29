@@ -14,7 +14,7 @@ export default async function page({ params }: { params: IChannelPageParams }) {
   return (
     <>
       {channel ? (
-        <div className="flex flex-col">
+        <div className="flex flex-col min-h-screen w-full">
           <ChannelHeader
             channel={channel}
             videoCount={videos?.length as number}
