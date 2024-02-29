@@ -7,6 +7,8 @@ import Avatar, { AvatarSize } from "../shared/Avatar";
 import { compactNumberFormat } from "@/utils/numUtils";
 import Link from "next/link";
 import Button from "../shared/Button";
+import SubscribeButton from "../shared/SubscribeButton";
+import { useSubscribed } from "@/hooks/useSubscribed";
 
 interface IChannelHeader {
   channel: Channel;
@@ -14,6 +16,7 @@ interface IChannelHeader {
 }
 const ChannelHeader = ({ channel, videoCount }: IChannelHeader) => {
   const currentUser = useContext(CurrentUserContext);
+  const { hasSubscribed, toggleSubscribed } = useSubscribed({ id: channel.id });
 
   return (
     <div className="flex flex-col md:flex-row gap-5 md:gap-0 px-24 py-6 justify-between items-center">
@@ -28,14 +31,18 @@ const ChannelHeader = ({ channel, videoCount }: IChannelHeader) => {
           </div>
         </div>
       </div>
-      {channel.userId === currentUser?.id ? (
+      {channel.userId !== currentUser?.id ? (
         <Link href={"/studio"}>
           <Button type="rounded-dark" className="capitalize">
             Manage Videos
           </Button>
         </Link>
       ) : (
-        <div>SubScribe</div>
+        <>
+          {channel && channel.id !== undefined && (
+            <SubscribeButton id={channel.id} />
+          )}
+        </>
       )}
     </div>
   );
