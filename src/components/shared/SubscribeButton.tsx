@@ -1,7 +1,5 @@
 import { useSubscribed } from "@/hooks/useSubscribed";
 import Button from "./Button";
-import { useContext } from "react";
-import { CurrentChannelContext } from "@/context/CurrentChannelContext";
 
 interface ISubscribeButton {
   id: string;
