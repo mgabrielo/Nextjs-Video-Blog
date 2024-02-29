@@ -1,5 +1,5 @@
 import getCurrentUser from "@/actions/getCurrentUser";
-import { NextResponse, NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 import prisma from "@/vendor/db";
 
 export async function POST(request: Request) {
@@ -9,7 +9,6 @@ export async function POST(request: Request) {
     return NextResponse.error();
   }
   const data = await request.json();
-  console.log();
   await prisma.channel.update({
     where: {
       id: data?.data?.id,

@@ -16,6 +16,7 @@ interface IChannelHeader {
 
 const ChannelHeader = ({ channel, videoCount }: IChannelHeader) => {
   const currentUser = useContext(CurrentUserContext);
+  const numOfSubs = compactNumberFormat(channel.subscriberCount);
 
   return (
     <div className="flex flex-col md:flex-row gap-5 md:gap-0 px-24 py-6 justify-between items-center">
@@ -25,7 +26,13 @@ const ChannelHeader = ({ channel, videoCount }: IChannelHeader) => {
           <h1 className="text-xl text-center md:text-start">{channel.name}</h1>
           <div className="flex flex-col md:flex-row items-center gap-1 md:gap-3 text-stone-400">
             <p className="font_medium">@{channel.handle}</p>
-            <p>{compactNumberFormat(channel.subscriberCount)} subscribers</p>
+            <p>
+              {`${numOfSubs} ${
+                channel.subscriberCount == 0 || channel.subscriberCount > 1
+                  ? "subscibers"
+                  : "subscriber"
+              }`}
+            </p>
             <p>{compactNumberFormat(videoCount)} Videos</p>
           </div>
         </div>
