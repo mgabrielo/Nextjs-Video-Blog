@@ -1,6 +1,6 @@
+"use client";
 import { CurrentUserContext } from "@/context/CurrentUserContext";
 import axios from "axios";
-import { useRouter } from "next/navigation";
 import { useCallback, useContext, useMemo } from "react";
 import { toast } from "react-hot-toast";
 
@@ -14,7 +14,6 @@ export enum LikeDislikeStatus {
 }
 export const useLikeDislike = ({ videoId }: IUseLikeDislike) => {
   const currentUser = useContext(CurrentUserContext);
-  const router = useRouter();
 
   const likeDislikeStatus = useMemo(() => {
     if (!currentUser || !videoId) {
@@ -71,13 +70,13 @@ export const useLikeDislike = ({ videoId }: IUseLikeDislike) => {
         } else {
           return;
         }
-        router.refresh();
+        window.location.reload();
         toast.success("Success");
       } catch (error) {
         toast.error("Something went Wrong");
       }
     },
-    [currentUser, videoId, router, likeDislikeStatus]
+    [currentUser, videoId, likeDislikeStatus]
   );
   return { toggleLikeDislike, likeDislikeStatus };
 };

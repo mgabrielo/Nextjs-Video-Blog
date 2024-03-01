@@ -29,6 +29,7 @@ export async function POST(_: Request, { params }: { params: IParams }) {
       dislikedVideoIds,
     },
   });
+
   return NextResponse.json({ user, video });
 }
 

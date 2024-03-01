@@ -11,8 +11,10 @@ export async function POST(_: Request, { params }: { params: IParams }) {
     return NextResponse.error();
   }
   let likedVideoIds = currentUser.likedVideoIds;
-  likedVideoIds.push(videoId);
 
+  if (!likedVideoIds.includes(videoId)) {
+    likedVideoIds.push(videoId);
+  }
   const video = await prisma.video.update({
     where: {
       id: videoId,
@@ -39,10 +41,12 @@ export async function DELETE(_: Request, { params }: { params: IParams }) {
   if (!currentUser || !videoId) {
     return NextResponse.error();
   }
-  let likedVideoIds = currentUser.likedVideoIds.filter(
-    (likedVideoId) => likedVideoId !== videoId
-  );
-
+  let likedVideoIds = currentUser.likedVideoIds;
+  if (likedVideoIds.includes(videoId)) {
+    likedVideoIds = likedVideoIds.filter(
+      (likedVideoId) => likedVideoId !== videoId
+    );
+  }
   const video = await prisma.video.update({
     where: {
       id: videoId,

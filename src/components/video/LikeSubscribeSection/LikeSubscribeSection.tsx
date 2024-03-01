@@ -1,7 +1,7 @@
 "use client";
 import { CurrentUserContext } from "@/context/CurrentUserContext";
 import { Channel, Video } from "@prisma/client";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import LikeDislikeButton from "./LikeDislikeButton";
 import Link from "next/link";
 import Avatar, { AvatarSize } from "@/components/shared/Avatar";
