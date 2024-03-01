@@ -1,4 +1,3 @@
-"use client";
 import { CurrentUserContext } from "@/context/CurrentUserContext";
 import axios from "axios";
 import { useCallback, useContext, useMemo } from "react";
