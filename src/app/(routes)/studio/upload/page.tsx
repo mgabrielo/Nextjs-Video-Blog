@@ -2,8 +2,8 @@
 
 import Button from "@/components/shared/Button";
 import UploadVideoModal from "@/components/shared/modals/UploadVideoModal";
-import VideoPreview from "@/components/stuidio/upload/VideoPreview";
-import VideoUploadForm from "@/components/stuidio/upload/VideoUploadForm";
+import VideoPreview from "@/components/studio/upload/VideoPreview";
+import VideoUploadForm from "@/components/studio/upload/VideoUploadForm";
 import { UploadVideoModalContext } from "@/context/UploadVideoModalContext";
 import { useProtectedRoute } from "@/hooks/useProtectedRoute";
 import axios from "axios";
