@@ -54,7 +54,6 @@ export default function UploadPage() {
     await axios
       .post("/api/videos", data)
       .then((res) => {
-        console.log(res.data);
         toast.success("Video Publish Successful");
         router.push("/studio");
       })

@@ -1,6 +1,8 @@
 import getChannelById from "@/actions/getChannelById";
 import getCommentsByVideoId from "@/actions/getCommentsVideoId";
+import getRecommendedVideos from "@/actions/getRecommendedVideo";
 import increaseVideoViewCount from "@/actions/increaseVideoViewCount";
+import VideoCard from "@/components/shared/VideoCard";
 import CommentSection from "@/components/video/CommentSection/CommentSection";
 import LikeSubscribeSection from "@/components/video/LikeSubscribeSection/LikeSubscribeSection";
 import Description from "@/components/video/VideoDescription";
@@ -15,6 +17,7 @@ export default async function page({ params }: { params: IVideoPage }) {
   const channel =
     video?.channelId && (await getChannelById({ id: video?.channelId }));
   const comments = await getCommentsByVideoId({ videoId });
+  const recommendedVideos = await getRecommendedVideos({ video });
   return video ? (
     <div className="flex flex-col lg:flex-row mx-6 mt-4 gap-4">
       <div className="w-full lg:w-3/4 flex flex-col gap-4">
@@ -29,6 +32,17 @@ export default async function page({ params }: { params: IVideoPage }) {
         {comments && videoId && (
           <CommentSection comments={comments} videoId={videoId} />
         )}
+        {recommendedVideos
+          ? recommendedVideos.map((recommendVideo) => (
+              <VideoCard
+                key={recommendVideo.id}
+                isVertical={false}
+                video={recommendVideo}
+                channel={recommendVideo.channel}
+                channelAvatar
+              />
+            ))
+          : null}
       </div>
     </div>
   ) : (

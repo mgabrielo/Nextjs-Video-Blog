@@ -40,58 +40,62 @@ const VideoCard = ({
           />
         </div>
         <div
-          className={`flex flex-col gap-2 items-start ${
+          className={`flex gap-2 items-start ${
             isVertical ? "w-full" : "w-3/5"
           }`}
         >
-          {channel && channelAvatar && isVertical ? (
-            <Avatar className="mt-1" imageSrc={channel.imageSrc} />
-          ) : null}
-          <div className="flex flex-col">
-            <h3
-              className={`line-clamp-2 px-1 ${
-                isVertical ? "text-lg" : "text-md leading-5"
-              }`}
-            >
-              {video.title}
-            </h3>
+          <div>
+            {channel && channelAvatar && isVertical ? (
+              <Avatar className="mt-1" imageSrc={channel.imageSrc} />
+            ) : null}
           </div>
-          {channel ? (
-            <div
-              className={`flex gap-2 items-center ${
-                !isVertical && channelAvatar ? (
-                  <>
-                    <Avatar
-                      size={AvatarSize.extraSmall}
-                      className="my-1"
-                      imageSrc={channel.imageSrc}
-                    />
-                  </>
-                ) : null
-              }`}
-            >
-              <p className="text-neutral-400 text-sm whitespace-nowrap">
-                {channel.name}
-              </p>
-            </div>
-          ) : null}
-          <p className="text-neutral-400 text-sm px-1">
-            {compactNumberFormat(video.viewCount)} views&nbsp;
-            {dayjs(video.createdAt).fromNow()}{" "}
-          </p>
-          {includeDescription ? (
-            <div className="whitespace-pre-line text-sm text-neutral-400">
-              {video.description.split("\n").map((line, index) => {
-                return line == "" ? (
-                  <br />
-                ) : (
-                  <p key={index} className="px-1">
-                    {line}
+          <div className="flex items-center gap-2 ">
+            <div className="flex flex-col">
+              <h3
+                className={`line-clamp-2 px-1 ${
+                  isVertical ? "text-lg" : "text-md leading-5"
+                }`}
+              >
+                {video.title}
+              </h3>
+              {channel ? (
+                <div
+                  className={`flex gap-2 items-center ${
+                    !isVertical && channelAvatar ? (
+                      <>
+                        <Avatar
+                          size={AvatarSize.extraSmall}
+                          className="my-1"
+                          imageSrc={channel.imageSrc}
+                        />
+                      </>
+                    ) : null
+                  }`}
+                >
+                  <p className="text-neutral-400 text-sm whitespace-nowrap">
+                    {channel.name}
                   </p>
-                );
-              })}
+                </div>
+              ) : null}
+              <p className="text-neutral-400 text-sm">
+                {compactNumberFormat(video.viewCount)} views&nbsp;
+                {dayjs(video.createdAt).fromNow()}{" "}
+              </p>
+              {includeDescription ? (
+                <div className="whitespace-pre-line text-sm text-neutral-400">
+                  {video.description.split("\n").map((line, index) => {
+                    return line == "" ? (
+                      <br />
+                    ) : (
+                      <p key={index} className="px-1">
+                        {line}
+                      </p>
+                    );
+                  })}
+                </div>
+              ) : null}
             </div>
-          ) : null}
+          </div>
         </div>
       </div>
     </Link>

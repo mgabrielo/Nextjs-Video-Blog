@@ -7,7 +7,6 @@ interface IVideoParams {
 
 export async function DELETE(_: Request, { params }: { params: IVideoParams }) {
   const { videoId } = params;
-  console.log(videoId);
   const currentChannel = await getCurrentChannel();
   if (!currentChannel) {
     return NextResponse.error();
