@@ -132,8 +132,7 @@ const VideoPlayer = ({ videoSrc }: IVideoPlayer) => {
   );
 
   const formattedDuration = useMemo(() => {
-    //@ts-ignore
-    return formatTimestamp(videoRef?.current?.duration);
+    return formatTimestamp(videoRef?.current?.duration || 0);
   }, [totalDuration]);
 
   useEffect(() => {
@@ -204,7 +203,7 @@ const VideoPlayer = ({ videoSrc }: IVideoPlayer) => {
               )}
             </div>
             <div className="text-sm">
-              {currentDuration}/{formattedDuration ? formattedDuration : "0:00"}
+              {currentDuration}/{formattedDuration}
             </div>
           </div>
           <div className="flex gap-2 p-3 items-center">
