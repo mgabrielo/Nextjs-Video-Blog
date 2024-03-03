@@ -54,6 +54,7 @@ const VideoPlayer = ({ videoSrc }: IVideoPlayer) => {
   );
 
   const handleClickPlay = useCallback(() => {
+    formattedDuration();
     if (isPlaying) {
       videoRef.current?.pause();
     } else {
@@ -131,9 +132,9 @@ const VideoPlayer = ({ videoSrc }: IVideoPlayer) => {
     [timestampFormatter]
   );
 
-  const formattedDuration = useMemo(() => {
+  const formattedDuration = () => {
     return formatTimestamp(videoRef?.current?.duration || 0);
-  }, [totalDuration]);
+  };
 
   useEffect(() => {
     if (videoRef.current) {
@@ -203,7 +204,7 @@ const VideoPlayer = ({ videoSrc }: IVideoPlayer) => {
               )}
             </div>
             <div className="text-sm">
-              {currentDuration}/{formattedDuration}
+              {currentDuration}/{formattedDuration()}
             </div>
           </div>
           <div className="flex gap-2 p-3 items-center">
