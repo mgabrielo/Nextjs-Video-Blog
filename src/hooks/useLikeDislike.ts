@@ -69,7 +69,6 @@ export const useLikeDislike = ({ videoId }: IUseLikeDislike) => {
         } else {
           return;
         }
-        // window.location.reload();
         router.refresh();
         toast.success("Success");
       } catch (error) {

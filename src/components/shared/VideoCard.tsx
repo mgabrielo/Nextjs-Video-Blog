@@ -32,7 +32,7 @@ const VideoCard = ({
           className={`relative aspect-video ${isVertical ? "w-full" : "w-2/5"}`}
         >
           <Image
-            className="object-cover rounded-lg"
+            className="object-cover rounded-lg h-auto w-auto"
             src={video.thumbnailSrc}
             alt={video.title}
             fill

@@ -26,7 +26,6 @@ const VideoPlayer = ({ videoSrc }: IVideoPlayer) => {
   const [_, setTrigger] = useState(false);
   const [currentDuration, setCurrentDuration] = useState("00:00");
   const [percentComplete, setPercentComplete] = useState(0);
-  const [totalDuration, setTotalDuration] = useState(0);
 
   const handleMuted = useCallback(() => {
     if (videoRef.current) {
@@ -135,12 +134,6 @@ const VideoPlayer = ({ videoSrc }: IVideoPlayer) => {
   const formattedDuration = () => {
     return formatTimestamp(videoRef?.current?.duration || 0);
   };
-
-  useEffect(() => {
-    if (videoRef.current) {
-      setTotalDuration(videoRef.current.duration);
-    }
-  }, [videoRef.current]);
 
   const updateTimeStamp = () => {
     setCurrentDuration(formatTimestamp(videoRef.current?.currentTime || 0));
