@@ -1,8 +1,8 @@
 import { CurrentUserContext } from "@/context/CurrentUserContext";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 import { useCallback, useContext, useMemo } from "react";
 import { toast } from "react-hot-toast";
-
 interface IUseLikeDislike {
   videoId: string;
 }
@@ -13,7 +13,7 @@ export enum LikeDislikeStatus {
 }
 export const useLikeDislike = ({ videoId }: IUseLikeDislike) => {
   const currentUser = useContext(CurrentUserContext);
-
+  const router = useRouter();
   const likeDislikeStatus = useMemo(() => {
     if (!currentUser || !videoId) {
       return false;
@@ -69,13 +69,14 @@ export const useLikeDislike = ({ videoId }: IUseLikeDislike) => {
         } else {
           return;
         }
-        window.location.reload();
+        // window.location.reload();
+        router.refresh();
         toast.success("Success");
       } catch (error) {
         toast.error("Something went Wrong");
       }
     },
-    [currentUser, videoId, likeDislikeStatus]
+    [currentUser, videoId, likeDislikeStatus, router]
   );
   return { toggleLikeDislike, likeDislikeStatus };
 };

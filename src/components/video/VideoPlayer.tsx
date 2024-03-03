@@ -26,6 +26,7 @@ const VideoPlayer = ({ videoSrc }: IVideoPlayer) => {
   const [_, setTrigger] = useState(false);
   const [currentDuration, setCurrentDuration] = useState("00:00");
   const [percentComplete, setPercentComplete] = useState(0);
+  const [totalDuration, setTotalDuration] = useState(0);
 
   const handleMuted = useCallback(() => {
     if (videoRef.current) {
@@ -36,6 +37,7 @@ const VideoPlayer = ({ videoSrc }: IVideoPlayer) => {
 
   const handleChangeVolume = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
+      e.preventDefault();
       if (videoRef.current) {
         videoRef.current.volume = Number(e.target.value);
         if (
@@ -48,7 +50,7 @@ const VideoPlayer = ({ videoSrc }: IVideoPlayer) => {
         }
       }
     },
-    []
+    [videoRef]
   );
 
   const handleClickPlay = useCallback(() => {
@@ -77,6 +79,7 @@ const VideoPlayer = ({ videoSrc }: IVideoPlayer) => {
   );
   const handleTimeUpdate = useCallback(
     (e: React.MouseEvent<HTMLElement>) => {
+      e.preventDefault();
       if (!timelineRef.current) {
         return;
       }
@@ -128,9 +131,15 @@ const VideoPlayer = ({ videoSrc }: IVideoPlayer) => {
     [timestampFormatter]
   );
 
-  const totalDuration = useMemo(() => {
-    return formatTimestamp(videoRef.current?.duration || 0);
-  }, []);
+  const formattedDuration = useMemo(() => {
+    return formatTimestamp(videoRef?.current?.duration || 0);
+  }, [totalDuration]);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      setTotalDuration(videoRef.current.duration);
+    }
+  }, [videoRef.current]);
 
   const updateTimeStamp = () => {
     setCurrentDuration(formatTimestamp(videoRef.current?.currentTime || 0));
@@ -181,18 +190,20 @@ const VideoPlayer = ({ videoSrc }: IVideoPlayer) => {
                   <MdVolumeUp />
                 )}
               </button>
-              <input
-                type="range"
-                min={0}
-                max={1}
-                step={"any"}
-                value={videoRef.current?.volume}
-                onChange={handleChangeVolume}
-                className="w-0 scale-0 group-hover/volume:w-20 group-hover/volume:scale-100 transition-all duration-200 origin-left accent-white"
-              />
+              {videoRef.current?.volume !== undefined && (
+                <input
+                  type="range"
+                  min={0}
+                  max={1}
+                  step={"any"}
+                  value={videoRef.current?.volume}
+                  onChange={handleChangeVolume}
+                  className="w-0 scale-0 group-hover/volume:w-20 group-hover/volume:scale-100 transition-all duration-200 origin-left accent-white"
+                />
+              )}
             </div>
             <div className="text-sm">
-              {currentDuration}/{totalDuration}
+              {currentDuration}/{formattedDuration}
             </div>
           </div>
           <div className="flex gap-2 p-3 items-center">

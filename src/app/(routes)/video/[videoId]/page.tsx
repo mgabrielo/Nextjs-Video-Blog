@@ -14,8 +14,7 @@ interface IVideoPage {
 export default async function page({ params }: { params: IVideoPage }) {
   const { videoId } = params;
   const video = await increaseVideoViewCount({ videoId });
-  const channel =
-    video?.channelId && (await getChannelById({ id: video?.channelId }));
+  const channel = video && (await getChannelById({ id: video?.channelId }));
   const comments = await getCommentsByVideoId({ videoId });
   const recommendedVideos = await getRecommendedVideos({ video });
   return video ? (
